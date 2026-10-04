@@ -42,14 +42,17 @@
       padding: 34px 24px 24px;
     }
 
-    .search-wrap {
+    .top-row {
       display: flex;
       justify-content: center;
+      align-items: center;
+      gap: 14px;
       margin-bottom: 42px;
+      position: relative;
     }
 
     .search-form {
-      width: min(760px, 82vw);
+      width: min(760px, 78vw);
       position: relative;
     }
 
@@ -84,6 +87,77 @@
       font-size: 20px;
       opacity: .65;
       pointer-events: none;
+    }
+
+    .apps-wrap {
+      position: relative;
+    }
+
+    .apps-button {
+      width: 56px;
+      height: 56px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.93);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      padding: 0;
+    }
+
+    .dot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 5px);
+      gap: 4px;
+    }
+
+    .dot-grid span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5f6368;
+    }
+
+    .apps-panel {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 68px;
+      width: 310px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.97);
+      box-shadow: 0 14px 34px rgba(40,40,60,.18);
+      z-index: 20;
+    }
+
+    .apps-panel.open {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .app-link {
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 6px;
+      border-radius: 14px;
+      font-size: 13px;
+    }
+
+    .app-link:hover {
+      background: #f1f3f4;
+    }
+
+    .app-link img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
     }
 
     .grid {
@@ -161,8 +235,9 @@
         --col-gap: 18px;
       }
       .grid { grid-template-columns: repeat(2, var(--tile-width)); }
-      .search-wrap { margin-bottom: 30px; }
+      .top-row { margin-bottom: 30px; }
       .page { padding-top: 24px; }
+      .apps-panel { right: -20px; }
     }
   </style>
 </head>
@@ -170,32 +245,81 @@
 <body>
   <main class="page">
 
-    <div class="search-wrap">
-      <form class="search-form" action="https://www.google.com/search" method="get" target="_top">
+    <div class="top-row">
+      <form class="search-form" action="https://www.google.com/search" method="get">
         <div class="search-g">G</div>
         <input class="search-input" type="search" name="q" placeholder="Search the web" autocomplete="off" autofocus>
         <div class="search-icon">⌕</div>
       </form>
+
+      <div class="apps-wrap">
+        <button class="apps-button" id="appsButton" aria-label="Google apps" title="Google apps">
+          <span class="dot-grid" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+
+        <div class="apps-panel" id="appsPanel">
+          <a class="app-link" href="https://mail.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=128" alt="">
+            Gmail
+          </a>
+          <a class="app-link" href="https://drive.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=128" alt="">
+            Drive
+          </a>
+          <a class="app-link" href="https://calendar.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=calendar.google.com&sz=128" alt="">
+            Calendar
+          </a>
+          <a class="app-link" href="https://photos.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=photos.google.com&sz=128" alt="">
+            Photos
+          </a>
+          <a class="app-link" href="https://maps.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=maps.google.com&sz=128" alt="">
+            Maps
+          </a>
+          <a class="app-link" href="https://www.youtube.com/">
+            <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="">
+            YouTube
+          </a>
+          <a class="app-link" href="https://docs.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=docs.google.com&sz=128" alt="">
+            Docs
+          </a>
+          <a class="app-link" href="https://sheets.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=sheets.google.com&sz=128" alt="">
+            Sheets
+          </a>
+          <a class="app-link" href="https://contacts.google.com/">
+            <img src="https://www.google.com/s2/favicons?domain=contacts.google.com&sz=128" alt="">
+            Contacts
+          </a>
+        </div>
+      </div>
     </div>
 
     <section class="grid">
 
       <div class="site">
-        <a class="tile" href="https://mail.google.com/" target="_top" title="Gmail">
+        <a class="tile" href="https://mail.google.com/" title="Gmail">
           <img src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=128" alt="Gmail">
         </a>
         <div class="label">Gmail</div>
       </div>
 
       <div class="site">
-        <a class="tile" href="https://chatgpt.com/" target="_top" title="ChatGPT">
+        <a class="tile" href="https://chatgpt.com/" title="ChatGPT">
           <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128" alt="ChatGPT">
         </a>
         <div class="label">ChatGPT</div>
       </div>
 
       <div class="site">
-        <a class="tile" href="https://www.ebay.com/" target="_top" title="eBay">
+        <a class="tile" href="https://www.ebay.com/" title="eBay">
           <img src="https://www.google.com/s2/favicons?domain=ebay.com&sz=128" alt="eBay">
         </a>
         <div class="label">eBay</div>
@@ -215,5 +339,21 @@
 
     </section>
   </main>
+
+  <script>
+    const appsButton = document.getElementById('appsButton');
+    const appsPanel = document.getElementById('appsPanel');
+
+    appsButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      appsPanel.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!appsPanel.contains(event.target) && !appsButton.contains(event.target)) {
+        appsPanel.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
