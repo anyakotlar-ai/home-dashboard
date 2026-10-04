@@ -15,6 +15,12 @@
       --text: #202124;
       --tile-bg: rgba(255,255,255,.82);
       --shadow: 0 7px 20px rgba(50,50,70,.13);
+
+      /* Google apps popup */
+      --apps-bg: rgba(68, 70, 88, .97);
+      --apps-hover: rgba(255,255,255,.09);
+      --apps-text: rgba(255,255,255,.94);
+      --apps-muted: rgba(255,255,255,.70);
     }
 
     * { box-sizing: border-box; }
@@ -119,45 +125,63 @@
       background: #5f6368;
     }
 
+    /* 3 columns × 4 rows */
     .apps-panel {
       display: none;
       position: absolute;
       right: 0;
       top: 68px;
-      width: 310px;
-      padding: 16px;
+      width: 330px;
+      padding: 18px;
       border-radius: 22px;
-      background: rgba(255,255,255,.97);
-      box-shadow: 0 14px 34px rgba(40,40,60,.18);
+      background: var(--apps-bg);
+      box-shadow: 0 18px 42px rgba(36, 36, 52, .30);
+      backdrop-filter: blur(10px);
       z-index: 20;
     }
 
     .apps-panel.open {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px 8px;
     }
 
     .app-link {
+      min-width: 0;
       text-decoration: none;
-      color: var(--text);
+      color: var(--apps-text);
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       gap: 7px;
-      padding: 10px 6px;
+      padding: 10px 4px 9px;
       border-radius: 14px;
-      font-size: 13px;
+      font-size: 12.5px;
+      line-height: 1.15;
+      text-align: center;
+      transition: background .12s ease, transform .12s ease;
     }
 
     .app-link:hover {
-      background: #f1f3f4;
+      background: var(--apps-hover);
+      transform: translateY(-1px);
     }
 
     .app-link img {
-      width: 34px;
-      height: 34px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
+      display: block;
+    }
+
+    .app-label {
+      max-width: 86px;
+      min-height: 29px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      color: var(--apps-text);
     }
 
     .grid {
@@ -237,7 +261,7 @@
       .grid { grid-template-columns: repeat(2, var(--tile-width)); }
       .top-row { margin-bottom: 30px; }
       .page { padding-top: 24px; }
-      .apps-panel { right: -20px; }
+      .apps-panel { right: -20px; width: 310px; }
     }
   </style>
 </head>
@@ -262,42 +286,67 @@
         </button>
 
         <div class="apps-panel" id="appsPanel">
-          <a class="app-link" href="https://mail.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=128" alt="">
-            Gmail
+
+          <a class="app-link" href="https://drive.google.com/" title="Google Drive">
+            <img src="icons/drive.svg" alt="">
+            <span class="app-label">Drive</span>
           </a>
-          <a class="app-link" href="https://drive.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=128" alt="">
-            Drive
+
+          <a class="app-link" href="https://docs.google.com/" title="Google Docs">
+            <img src="icons/docs.svg" alt="">
+            <span class="app-label">Docs</span>
           </a>
-          <a class="app-link" href="https://calendar.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=calendar.google.com&sz=128" alt="">
-            Calendar
+
+          <a class="app-link" href="https://contacts.google.com/" title="Google Contacts">
+            <img src="icons/contacts.png" alt="">
+            <span class="app-label">Contacts</span>
           </a>
-          <a class="app-link" href="https://photos.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=photos.google.com&sz=128" alt="">
-            Photos
+
+          <a class="app-link" href="https://maps.google.com/" title="Google Maps">
+            <img src="icons/map.svg" alt="">
+            <span class="app-label">Maps</span>
           </a>
-          <a class="app-link" href="https://maps.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=maps.google.com&sz=128" alt="">
-            Maps
+
+          <a class="app-link" href="https://earth.google.com/web/" title="Google Earth">
+            <img src="icons/earth.png" alt="">
+            <span class="app-label">Earth</span>
           </a>
-          <a class="app-link" href="https://www.youtube.com/">
-            <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="">
-            YouTube
+
+          <a class="app-link" href="https://translate.google.com/" title="Google Translate">
+            <img src="icons/translate.svg" alt="">
+            <span class="app-label">Translate</span>
           </a>
-          <a class="app-link" href="https://docs.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=docs.google.com&sz=128" alt="">
-            Docs
+
+          <a class="app-link" href="https://slides.google.com/" title="Google Slides">
+            <img src="icons/slides.svg" alt="">
+            <span class="app-label">Slides</span>
           </a>
-          <a class="app-link" href="https://sheets.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=sheets.google.com&sz=128" alt="">
-            Sheets
+
+          <a class="app-link" href="https://voice.google.com/" title="Google Voice">
+            <img src="icons/voice.svg" alt="">
+            <span class="app-label">Voice</span>
           </a>
-          <a class="app-link" href="https://contacts.google.com/">
-            <img src="https://www.google.com/s2/favicons?domain=contacts.google.com&sz=128" alt="">
-            Contacts
+
+          <a class="app-link" href="https://messages.google.com/web/" title="Google Messages">
+            <img src="icons/massagess.svg" alt="">
+            <span class="app-label">Messages</span>
           </a>
+
+          <a class="app-link" href="https://classroom.google.com/" title="Google Classroom">
+            <img src="icons/classroom.svg" alt="">
+            <span class="app-label">Classroom</span>
+          </a>
+
+          <a class="app-link" href="https://home.google.com/" title="Google Home">
+            <img src="icons/home.svg" alt="">
+            <span class="app-label">Home</span>
+          </a>
+
+          <a class="app-link" href="https://passwords.google.com/" title="Google Password Manager">
+            <img src="icons/password-manager.svg" alt="">
+            <span class="app-label">Password Manager</span>
+          </a>
+
         </div>
       </div>
     </div>
