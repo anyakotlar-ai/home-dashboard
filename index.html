@@ -227,15 +227,18 @@ background-repeat: no-repeat;
     }
 
     .label {
-      width: var(--tile-width);
-      text-align: center;
-      font-size: 15px;
-      line-height: 1.15;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: rgba(0, 0, 0, .82);
-    }
+  position: absolute;
+  bottom: 10px;
+  width: var(--tile-width);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1;
+  color: rgba(20, 20, 20, .85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
 
     .empty .tile {
       border: 2px dashed rgba(80,80,100,.18);
